@@ -23,6 +23,6 @@ response = requests.get(url2)
 data = response.json()
 
 current = data["current"]
-# temperature = current["temperature_2m"]
+#temperature = current["temperature_2m"]
 wind_direction = current["wind_direction_10m"]
 print("Wind direction 10m:", wind_direction )
