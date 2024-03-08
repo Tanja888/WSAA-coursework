@@ -1,8 +1,8 @@
-# Tanja Juric
 # Assignment: Current weather
 # Write a python program called currentweather.py that will print out:
 # the current temperature on the console (and only the temperature)
 # Also print the current wind direction (10m) from: https://open-meteo.com/
+# Author: Tanja Juric
 
 import requests
 import json
