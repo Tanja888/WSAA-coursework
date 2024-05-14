@@ -9,7 +9,7 @@ g = Github(apikey)
 repo = g.get_repo("Tanja888/WSAA-coursework")
 # print(repo.clone_url)
 
-fileInfo = repo.get_contents("assignment04.txt")
+fileInfo = repo.get_contents("assignments/assignment04.txt")
 urlOfFile = fileInfo.download_url
 # print(urlOfFile)
 
