@@ -1,25 +1,27 @@
-# Write a program in Python that will read a file from a repository
-# The program should then replace all the instances of the text "Andrew" with your name. 
-# The program should then commit those changes and push the file back to the repository 
-# (You will need authorisation to do this).
-# Author: Tanja Juric
-
-# How to use API keys to access data
-
+from github import Github
+from config import config as cfg
 import requests
-import json
-#from config import config as cfg
 
-filename = "assignment04.txt"
+apikey = cfg["githubkey"]
+g = Github(apikey)
 
-#url = 'https://api.github.com/repos/andrewbeattycourseware/datarepresentation/contents/code'
-url = 'https://github.com/Tanja888/WSAA-coursework/blob/main/assignments/assignment04.txt'
+# Clone URL of a repository 
+repo = g.get_repo("Tanja888/WSAA-coursework")
+# print(repo.clone_url)
 
-#apikey = cfg["githubkey"]
-response = requests.get(url)
+fileInfo = repo.get_contents("assignment04.txt")
+urlOfFile = fileInfo.download_url
+# print(urlOfFile)
 
-print(response.status_code)
-#print (response.json())
+response = requests.get(urlOfFile)
+contentOfFile = response.text
+print(contentOfFile)
 
-with open(filename, 'r') as fp:
-    print(fp.read())
+# Replace the instances of Andrew with Tanja
+newContents = contentOfFile.replace("Andrew", "Tanja")
+print(newContents)
+
+# Update the contents of the file on Github
+# update_file(path, message, content, sha, branch=NotSet, committer=NotSet, author=NotSet)
+gitHubResponse = repo.update_file(fileInfo.path, "updated by prog", newContents, fileInfo.sha)
+print(gitHubResponse)
